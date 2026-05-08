@@ -1,6 +1,8 @@
 import { ChatSession, ChatMessage } from '@/types/chat';
+import { createSampleData } from './sampleData';
 
 const STORAGE_KEY = 'historychatwaibnu_sessions';
+const SAMPLE_LOADED_KEY = 'historychatwaibnu_sample_loaded';
 
 function serializeSessions(sessions: ChatSession[]): string {
   return JSON.stringify(sessions.map(s => ({
@@ -30,7 +32,16 @@ function deserializeSessions(data: string): ChatSession[] {
 export function getSessions(): ChatSession[] {
   if (typeof window === 'undefined') return [];
   const data = localStorage.getItem(STORAGE_KEY);
-  if (!data) return [];
+  if (!data) {
+    // Load sample data on first visit
+    if (!localStorage.getItem(SAMPLE_LOADED_KEY)) {
+      const samples = createSampleData();
+      localStorage.setItem(STORAGE_KEY, serializeSessions(samples));
+      localStorage.setItem(SAMPLE_LOADED_KEY, 'true');
+      return samples;
+    }
+    return [];
+  }
   try {
     return deserializeSessions(data);
   } catch {

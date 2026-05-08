@@ -2,6 +2,7 @@
 
 ## Platform
 - **Vercel** (primary)
+- Production URL: https://historychatwaibnu.vercel.app
 - Region: `sin1` (Singapore)
 
 ## Branches

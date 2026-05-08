@@ -42,3 +42,4 @@ public/         → Static assets
 - [ ] Auth system (NextAuth / Clerk)
 - [ ] Real-time chat (Pusher / Socket.io / Ably)
 - [ ] File upload (Cloudflare R2 / AWS S3)
+# Auto-deploy from GitHub enabled
